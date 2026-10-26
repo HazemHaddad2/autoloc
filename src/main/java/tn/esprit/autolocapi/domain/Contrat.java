@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import jakarta.persistence.FetchType;
@@ -22,7 +23,14 @@ import jakarta.persistence.CascadeType;
 @AllArgsConstructor
 public class Contrat {
 
-    @OneToMany(mappedBy = "contrat", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+
+    @OneToMany(
+            mappedBy = "contrat",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @JsonManagedReference("contrat-paiements")
     private List<Paiement> paiements = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY)
